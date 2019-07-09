@@ -8,6 +8,10 @@ module.exports.profile = function(req,res){
 }
 
 module.exports.signIn = function(req,res){
+    if (req.isAuthenticated()){
+        return res.redirect('/users/profile');
+       }
+       
     return res.render('users_sign_in',{
         title: "SignIn"
     })
@@ -44,12 +48,23 @@ module.exports.create = function(req,res){
 
 //signin and create session 
 module.exports.createSession = function(req,res){
-    // TODO
+    return res.redirect('/');
 }
 
 
 module.exports.signUp = function(req,res){
+      if (req.isAuthenticated()){
+       return res.redirect('/users/profile');
+      }
     return res.render('users_sign_up',{
         title: "SignUp"
-    })
+    })  
+}
+
+
+module.exports.signOut = function(req,res){
+    
+      req.logout();
+
+    return res.redirect('/');
 }
