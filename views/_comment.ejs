@@ -1,0 +1,13 @@
+
+    <li>
+            <p>
+                        <!-- view level check to only outhorized user can destroy the post -->
+                   <% if (locals.user && locals.user.id == post.user.id) { %>
+                         <small>
+                               <a href="/comments/destroy/<%= comment.id %>">x</a>
+                            </small>
+                            <% } %>
+                       <%= comment.content %>
+                       <small> Created By <%= comment.user.name %></small>
+                    </p>            
+      </li>

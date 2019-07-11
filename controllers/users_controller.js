@@ -1,10 +1,14 @@
 const User = require('../models/user')
 
 module.exports.profile = function(req,res){
-    // res.end('<h1>User Profile</h1>');
+    User.findById(req.params.id,function(err,user){
+       // res.end('<h1>User Profile</h1>');
     return res.render('users_profile',{
-        title: 'Profile'
-    });
+        title: 'Profile',
+        profile_user: user
+     }); 
+    })
+   
 }
 
 module.exports.signIn = function(req,res){
@@ -44,6 +48,17 @@ module.exports.create = function(req,res){
     })
 
 
+}
+
+
+module.exports.update = function(req,res){
+      if (req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body,function(err,user){
+            return res.redirect('back');
+        })
+      } else{
+         return  res.status(401).send('Unauthorized');
+      } 
 }
 
 //signin and create session 

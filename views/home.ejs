@@ -13,48 +13,23 @@
                 <div id="posts-list-container">
                    <ul>
                         <% for(post of posts){ %>
-                         <li> 
-                            <p>
-                               <!-- view level check to only outhorized user can destroy the post -->
-                               <% if (locals.user && locals.user.id == post.user.id) { %>
-                               <small>
-                                  <a href="/posts/destroy/<%= post.id %>">x</a>
-                               </small>
-                               <% } %>
-                            <%= post.content%>
-                            <small>Created By: <%= post.user.name%></small>
-                            </p> 
-                        </li>
 
-                        <div class="post-comments">
-                           <% if(locals.user) {%>
-                            <form action="/comments/create" method="POST">
-                              <input type="text" name="content" placeholder="Comment Please !" required>
-                              <input type="hidden" name="post" value="<%= post._id%>">
-                              <input type="submit" value="Place Comment">
-                            </form>
-                           <% } %>
-                           <div class="post-comment-list">
-                              <ul class="post-comment-<%= post._id%>">
-                                <% for (comment of post.comments) {%>
-                                  <p>
-                                      <!-- view level check to only outhorized user can destroy the post -->
-                                 <% if (locals.user && locals.user.id == post.user.id) { %>
-                                       <small>
-                                             <a href="/comments/destroy/<%= comment.id %>">x</a>
-                                          </small>
-                                          <% } %>
-                                     <%= comment.content %>
-                                     <small> Created By <%= comment.user.name %></small>
-                                  </p>
-                                 <% } %>
-                              </ul>
-
-                           </div>
-
-                        </div>
+                          <%- include('_post') -%>
+                          
                          <% } %>
                    </ul>
                    
                 </div>
         </section>   
+
+        <section id="user-friends">
+           <h4>Friends</h4>
+           <% for(u of all_users) {%>
+               <p>
+                  <a href="/users/profile/<%= u.id %>">
+                    <%= u.name %>
+                  </a>
+               </p>
+            <% } %>
+
+        </section>
