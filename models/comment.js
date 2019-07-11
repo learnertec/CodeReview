@@ -8,12 +8,12 @@ const commentSchema = new mongoose.Schema({
 //  comment belongs to user
  user: {
    type: mongoose.Schema.Types.ObjectId,
-   ref: 'user'
+   ref: 'User'
  },
 //  comment belongs to post
  post: {
      type: mongoose.Schema.Types.ObjectId,
-     ref: 'post'
+     ref: 'Post'
  }
 },{
     timestamps: true
