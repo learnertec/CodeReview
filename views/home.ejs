@@ -15,6 +15,12 @@
                         <% for(post of posts){ %>
                          <li> 
                             <p>
+                               <!-- view level check to only outhorized user can destroy the post -->
+                               <% if (locals.user && locals.user.id == post.user.id) { %>
+                               <small>
+                                  <a href="/posts/destroy/<%= post.id %>">x</a>
+                               </small>
+                               <% } %>
                             <%= post.content%>
                             <small>Created By: <%= post.user.name%></small>
                             </p> 
@@ -32,6 +38,12 @@
                               <ul class="post-comment-<%= post._id%>">
                                 <% for (comment of post.comments) {%>
                                   <p>
+                                      <!-- view level check to only outhorized user can destroy the post -->
+                                 <% if (locals.user && locals.user.id == post.user.id) { %>
+                                       <small>
+                                             <a href="/comments/destroy/<%= comment.id %>">x</a>
+                                          </small>
+                                          <% } %>
                                      <%= comment.content %>
                                      <small> Created By <%= comment.user.name %></small>
                                   </p>
