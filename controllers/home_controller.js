@@ -1,13 +1,13 @@
  const Post = require('../models/post');
 
 module.exports.home = function(req,res){
-    // return res.end('<h1>Express is up for codial</h1>');
-    // Populating the user of each posts
+    // populate the user of each post
     Post.find({}).populate('user').exec(function(err,posts){
         return res.render('home',{
-            title: 'Codial Home',
+            title: 'Codial | Home',
             posts: posts
         });
     })
+  
       
 }
