@@ -10,6 +10,7 @@
   "author": "ravi ranjan",
   "license": "ISC",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^3.0.0",
     "cookie-parser": "^1.4.4",
     "ejs": "^2.6.2",
@@ -18,6 +19,7 @@
     "express-session": "^1.16.2",
     "mongoose": "^5.6.3",
     "node-sass-middleware": "^0.11.0",
+    "noty": "^3.2.0-beta",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   }

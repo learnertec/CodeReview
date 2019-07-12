@@ -64,6 +64,7 @@ module.exports.update = function(req,res){
 
 //signin and create session 
 module.exports.createSession = function(req,res){
+    req.flash('success','Logged in successfully');
     return res.redirect('/');
 }
 
@@ -81,6 +82,8 @@ module.exports.signUp = function(req,res){
 module.exports.signOut = function(req,res){
     
       req.logout();
+
+      req.flash('success','Logged out successfully');
 
     return res.redirect('/');
 }
