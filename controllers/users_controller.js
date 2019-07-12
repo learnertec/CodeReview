@@ -1,5 +1,6 @@
 const User = require('../models/user')
 
+// No nesting only one callback level so don't need to convert it into async await
 module.exports.profile = function(req,res){
     User.findById(req.params.id,function(err,user){
        // res.end('<h1>User Profile</h1>');
