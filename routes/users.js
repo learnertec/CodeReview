@@ -18,6 +18,8 @@ router.get('/sign-out',usersController.signOut);
 //use passport to authenticate
 router.post('/create-session', passport.authenticate('local',{failureRedirect: '/users/sign-in'}),usersController.createSession);
 
-
+// /auth/google is given by the passport
+router.get('/auth/google',passport.authenticate('google',{scope: ['profile','email']}));
+router.get('/auth/google/callback',passport.authenticate('google',{failureRedirect: '/users/sign-in'}),usersController.createSession);
 
 module.exports = router;
