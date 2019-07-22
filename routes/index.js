@@ -9,6 +9,9 @@ router.get('/',homeController.home);
 router.use('/users', require('./users'));
 router.use('/posts',require('./posts'));
 router.use('/comments',require('./comments'));
+router.use('/likes',require('./likes'));
+
+
 
 // set root index file path for api folder so that for api it look into api folder
 router.use('/api',require('./api'));

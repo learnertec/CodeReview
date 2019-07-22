@@ -1,15 +1,23 @@
- <li id="post-<%= post._id %>"> 
+ <li id="post-<%= post._id%>"> 
         <p>
            <!-- view level check to only outhorized user can destroy the post -->
            <% if (locals.user && locals.user.id == post.user.id) { %>
            <small>
-              <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">x</a>
+              <a class="delete-post-button" href="/posts/destroy/<%= post.id%>">x</a>
            </small>
            <% } %>
-        <%= post.content%>
-        <small>Created By: <%= post.user.name%></small>
+        <%= post.content %>
+        <small>Created By: <%= post.user.name %></small>
         </p> 
-   
+        <small>
+           <% if (locals.user) {%>
+             <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%= post._id%>&type=Post">
+                 <%= post.likes.length %>Likes
+             </a>
+             <% } else {%>
+               <%= post.likes.length %> Likes
+            <% } %>
+        </small>
 
     <div class="post-comments">
        <% if(locals.user) {%>
@@ -20,8 +28,8 @@
         </form>
        <% } %>
        <div class="post-comment-list">
-          <ul class="post-comment-<%= post._id%>">
-            <% for (comment of post.comments) {%>
+          <ul class="post-comment-<%= post._id %>">
+            <% for(comment of post.comments) {%>
                <%- include('_comment') -%>
              
              <% } %>
