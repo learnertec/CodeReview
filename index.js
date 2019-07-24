@@ -1,4 +1,6 @@
 const express = require('express');
+const env = require('./config/environment');
+const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const app = express();
 
@@ -26,22 +28,25 @@ const chatServer = require('http').Server(app);
 const chatSocket = require('./config/chat_socket').chatSockets(chatServer);
 chatServer.listen(5000);
 console.log('Chat Server is listening on port 5000');
-
-
+const path = require('path');
+ 
+if(env.name == 'development'){
 app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
+    src: path.join(__dirname,env.aseet_path,'scss'),
+    dest: path.join(__dirname,env.aseet_path,'css'),
     debug: true,
     outputStyle: 'extended',
     prefix: '/css'
 }))
+}
 
 app.use(express.urlencoded());
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static(env.aseet_path));
 //make upload path available to browser
 app.use('/uploads',express.static(__dirname + '/uploads'));
+app.use(logger(env.morgan.mode,env.morgan.options));
 
 app.use(expressLayouts);
 
@@ -58,7 +63,7 @@ app.set('views','./views');
 // mongo store is used to store the session cookie in db
 app.use(session({
     name: 'codial',
-    secret: 'somethhing',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {

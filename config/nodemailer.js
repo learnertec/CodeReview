@@ -2,18 +2,10 @@
 const nodeMiler = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
+const env = require('./environment');
 
 
-let transporter = nodeMiler.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: {
-        user: 'r.ranjantec@gmail.com',
-        pass: 'learner@9470039793'
-    } 
-});
+let transporter = nodeMiler.createTransport(env.smtp);
 
 
 // let renderTemplate = function(data,relativePath){
