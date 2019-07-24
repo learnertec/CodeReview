@@ -12,7 +12,7 @@ const accessLogStream = rfs('access.log',{
 
 const development = {
     name: 'development',
-    aseet_path: './assets',
+    aseet_path: './public/assets',
     session_cookie_key: 'somethhing',
     smtp: {
         service: 'gmail',
